@@ -1,15 +1,12 @@
 package com.yuvraj.journalApp.service;
 
-import com.yuvraj.journalApp.entity.JournalEntry;
 import com.yuvraj.journalApp.entity.User;
-import com.yuvraj.journalApp.repository.JournalEntryRepository;
 import com.yuvraj.journalApp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,10 +35,6 @@ public class UserService {
 
     public User findByUserName(String userName){
         return userRepository.findByUserName(userName);
-    }
-
-    public void deleteByUserName(User user) {
-        userRepository.deleteByUserName(user);
     }
 }
 

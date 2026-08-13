@@ -82,31 +82,18 @@ public class JournalEntryControllerV2 {
     }
 
 
-//    @PutMapping("/id/{myId}")
-//    public ResponseEntity<?> updateJournalEntry(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
-//        JournalEntry old = journalEntryService.findById(myId).orElse(null);
-//        if(old != null){
-////            if(newEntry.getTitle() != null && newEntry.getTitle().length() > 0) old.setTitle(newEntry.getTitle());
-////            else old.setTitle(old.getTitle());
-////
-////            if(newEntry.getContent() != null && newEntry.getContent().length() > 0) old.setContent(newEntry.getContent());
-////            else old.setContent(old.getContent());
-//
-//            old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().isEmpty() ? newEntry.getTitle() : old.getTitle());
-//            old.setContent(newEntry.getContent() != null && !newEntry.getContent().isEmpty() ? newEntry.getContent() : old.getContent());
-//            journalEntryService.saveEntry(old, userName);
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+    @PutMapping("/id/{userName}/{myId}")
+    public ResponseEntity<?> updateJournalEntry(@PathVariable String userName,
+                                                @PathVariable ObjectId myId,
+                                                @RequestBody JournalEntry newEntry
+    ) {
+        JournalEntry old = journalEntryService.findById(myId).orElse(null);
+        if(old != null){
+            old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().isEmpty() ? newEntry.getTitle() : old.getTitle());
+            old.setContent(newEntry.getContent() != null && !newEntry.getContent().isEmpty() ? newEntry.getContent() : old.getContent());
+            journalEntryService.saveEntry(old);
+            return new ResponseEntity<>(old,        HttpStatus.OK);
+        }
+        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
-
-
-//    This is for sending multiple entries in same time
-//    @PostMapping
-//    public boolean createEntry(@RequestBody List<JournalEntry> myEntry){
-//        for(JournalEntry entry : myEntry){
-//            journalEntries.put(entry.getId(), entry);
-//        }
-//        return true;
-//    }

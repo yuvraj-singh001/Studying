@@ -49,13 +49,16 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/Un/{userName}")
-    public ResponseEntity<?> deleteUserById(@PathVariable String userName){
-        User user = userService.findByUserName(userName);
-        if(user != null){
-            userService.deleteByUserName(user);
+    @DeleteMapping("/id/{myId}")
+    public ResponseEntity<?> deleteUserById(@PathVariable ObjectId myId) {
+
+        Optional<User> user = userService.findById(myId);
+
+        if (user.isPresent()) {
+            userService.deleteById(myId);
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
+
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -63,7 +66,6 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable String userName , @RequestBody User user){
         User userInDb = userService.findByUserName(userName);
         if(userInDb != null){
-//            userInDb.setUserName(user.getUserName());
             userInDb.setPassword(user.getPassword());
             userService.saveEntry(userInDb);
             return new ResponseEntity<>(HttpStatus.OK);
