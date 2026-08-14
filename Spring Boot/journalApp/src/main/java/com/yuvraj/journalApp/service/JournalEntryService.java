@@ -49,6 +49,7 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
+    @Transactional
     public void deleteById(ObjectId id, String userName){
         User user = userService.findByUserName(userName);
         if(user != null){

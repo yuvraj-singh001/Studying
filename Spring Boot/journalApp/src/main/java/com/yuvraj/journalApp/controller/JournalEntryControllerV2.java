@@ -92,7 +92,7 @@ public class JournalEntryControllerV2 {
             old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().isEmpty() ? newEntry.getTitle() : old.getTitle());
             old.setContent(newEntry.getContent() != null && !newEntry.getContent().isEmpty() ? newEntry.getContent() : old.getContent());
             journalEntryService.saveEntry(old);
-            return new ResponseEntity<>(old,        HttpStatus.OK);
+            return new ResponseEntity<>(old, HttpStatus.OK);
         }
         return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
